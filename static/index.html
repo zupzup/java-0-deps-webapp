@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>0 Dependencies Web Application in Java</title>
+</head>
+<body>
+<h1>Hello {name}, I have no dependencies - free as a bird!</h1>
+<form action="/post" method="post">
+    Say Hello to:
+    <input name="user" placeholder="insert your name!"/>
+    <button type="submit">Go!</button>
+    <br/>
+    <br/>
+</form>
+<h2>Some JSON? Add your friends:</h2>
+Name: <input id="name" name="name" placeholder="insert your name!"/>
+Age: <input id="age" name="age" placeholder="insert your age!"/>
+<button onClick="postJSON()">submit</button>
+<div id="result"></div>
+<script>
+    function postJSON() {
+        var name = document.querySelector("#name").value;
+        var age = document.querySelector("#age").value;
+        var body = {name: name, age: age};
+        fetch("/json", {
+            method: "post",
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            var content = "Response: <br />" + JSON.stringify(data) + "<br /><br />Friends: " + data.friends;
+            document.querySelector("#result").innerHTML = content;
+        }).catch(function (err) {
+            window.alert(err);
+        });
+    }
+</script>
+</body>
+</html>

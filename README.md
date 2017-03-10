@@ -1,2 +1,9 @@
 # java-0-deps-webapp
-Java Web Application without any dependencies
+
+Starts a Web Server on port 8080 
+
+run with:
+
+```bash
+javac WebApp.java && java WebApp
+```
